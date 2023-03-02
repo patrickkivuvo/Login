@@ -21,7 +21,7 @@ public class UserController {
     private UserService service;
 
     @GetMapping
-    public List<User> getFlights(){
+    public List<User> getUsers(){
         return service.findAllUsers();
     }
 
@@ -35,7 +35,7 @@ public class UserController {
         return service.getUserByUserId(userId);
     }
     @GetMapping("/username/{username}")
-    public List<User> findUserUsingUsername(@PathVariable String username) {
+    public List<User> findUserByUsername(@PathVariable String username) {
         return service.getUserByUsername(username);
     }
     @GetMapping("/password/{password}")
@@ -43,8 +43,13 @@ public class UserController {
         return service.getUserByPassword(password);
     }
 
+    @PutMapping
+    public User modifyUser(@RequestBody User user){
+        return service.updateUser(user);
+    }
+
     @DeleteMapping("/{userId}")
-    public String deleteFlight(@PathVariable String userId){
+    public String deleteUser(@PathVariable String userId){
         return service.deleteUser(userId);
     }
 

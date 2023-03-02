@@ -53,7 +53,7 @@ const postUser = async (e) =>{
             const data = {username,password};
             const res = await axios.post('http://localhost:8080/user', data);
             console.log(res);
-            // window.location.reload(true);
+            window.location.reload(true);
         }
     } catch (error) {
         alert('error');

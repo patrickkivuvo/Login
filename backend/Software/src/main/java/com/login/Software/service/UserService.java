@@ -13,6 +13,9 @@ public class UserService {
     @Autowired
     private UserRepository repository;
 
+
+    //CRUD CREATE, READ, UPDATE, DELETE
+
     public User addUser(User user){
         user.setUserId(UUID.randomUUID().toString().split("-")[0]);
         return repository.save(user);
@@ -37,10 +40,19 @@ public class UserService {
         return repository.findAll();
     }
 
+    public User updateUser(User userRequest){
+        //get the existing document from DB
+        //populate new value from request to existing object/entity/document
+        User existingUser = repository.findById(userRequest.getUserId()).get();
+        existingUser.setUsername(userRequest.getUsername());
+        existingUser.setPassword(userRequest.getPassword());
+                return repository.save(existingUser);
+    }
+
 
     public String deleteUser(String userId){
         repository.deleteById(userId);
-        return userId + "user deleted from dashboard";
+        return userId + " User deleted from dashboard";
     }
 
 
